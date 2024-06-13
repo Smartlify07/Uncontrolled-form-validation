@@ -10,16 +10,24 @@ const Form = () => {
   const [error, setError] = useState(false);
 
   const validateForm = (firstName, lastName, email, phoneNumber) => {
-    const validEmail = "^[^s@]+@[^s@]+.[^s@]+$".match(email);
+    let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    const test = "anosikeobinna895@gmail.com".match(emailRegex);
+    console.log(test);
+    const validEmail = email.match(emailRegex);
+    console.log(validEmail);
     let validLastName = lastName !== "";
     let validFirstName = firstName !== "";
-    let validPhoneNumber = phoneNumber !== "";
+    let validPhoneNumber = phoneNumber !== "" && phoneNumber.length > 9;
 
-    if ((validEmail, validLastName, validFirstName, validPhoneNumber)) {
+    if (validEmail && validLastName && validFirstName && validPhoneNumber) {
       console.log("Valid");
+
       return true;
     } else {
       console.log("Invalid");
+      console.log(validPhoneNumber, validEmail);
+
       return false;
     }
   };
