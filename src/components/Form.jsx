@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
+import { MdCancel } from "react-icons/md";
 const Form = () => {
   const firstNameRef = useRef(null);
   const lastNameRef = useRef(null);
@@ -78,10 +79,10 @@ const Form = () => {
 
         <div
           className={`absolute flex gap-2 items-center top-1 left-0 bg-white border px-4 py-3 rounded-lg shadow-sm transition-all ${
-            error && `translate-x-[50%] mb-5`
-          } translate-x-[500%]`}
+            error && `translate-x-[140px] mb-5`
+          } translate-x-[640px]`}
         >
-          Invalid fields <FaCheckCircle className="text-red-500" />
+          Invalid fields <MdCancel className="text-xl text-red-500" />
         </div>
 
         <div className="flex py-5  mt-5 flex-col gap-4 w-full">
