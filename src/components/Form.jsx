@@ -81,7 +81,7 @@ const Form = () => {
             error && `translate-x-[50%] mb-5`
           } translate-x-[400%]`}
         >
-          Please fill in all fields <FaCheckCircle className="text-red-500" />
+          Invalid fields <FaCheckCircle className="text-red-500" />
         </div>
 
         <div className="flex py-5  mt-5 flex-col gap-4 w-full">
