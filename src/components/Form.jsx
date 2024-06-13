@@ -79,7 +79,7 @@ const Form = () => {
         <div
           className={`absolute flex gap-2 items-center top-1 left-0 bg-white border px-4 py-3 rounded-lg shadow-sm transition-all ${
             error && `translate-x-[50%] mb-5`
-          } translate-x-[400%]`}
+          } translate-x-[500%]`}
         >
           Invalid fields <FaCheckCircle className="text-red-500" />
         </div>
