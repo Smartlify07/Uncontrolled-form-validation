@@ -85,7 +85,7 @@ const SignUpForm = () => {
 
             <button
               type="submit"
-              className="mt-3 w-full text-white font-semibold py-3 px-5 rounded-md transition-all bg-slate-700 hover:bg-slate-800"
+              className="mt-3 w-full text-white font-semibold py-3 px-5 rounded-md transition-all bg-slate-600 hover:bg-slate-700"
             >
               Sign up
             </button>
