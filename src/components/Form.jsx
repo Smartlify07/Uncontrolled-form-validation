@@ -1,144 +1,85 @@
-import { useRef, useState } from "react";
+import { Form, Formik } from "formik";
+import * as Yup from "yup";
+import { useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
-import { MdCancel } from "react-icons/md";
-const Form = () => {
-  const firstNameRef = useRef(null);
-  const lastNameRef = useRef(null);
-  const emailRef = useRef(null);
-  const phoneRef = useRef(null);
-
+import TextInput from "./TextInput";
+const SignUpForm = () => {
   const [success, setSuccess] = useState(false);
-  const [error, setError] = useState(false);
-
-  const validateForm = (firstName, lastName, email, phoneNumber) => {
-    let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    const test = "anosikeobinna895@gmail.com".match(emailRegex);
-    console.log(test);
-    const validEmail = email.match(emailRegex);
-    console.log(validEmail);
-    let validLastName = lastName !== "";
-    let validFirstName = firstName !== "";
-    let validPhoneNumber = phoneNumber !== "" && phoneNumber.length > 9;
-
-    if (validEmail && validLastName && validFirstName && validPhoneNumber) {
-      console.log("Valid");
-
-      return true;
-    } else {
-      console.log("Invalid");
-      console.log(validPhoneNumber, validEmail);
-
-      return false;
-    }
-  };
-
-  const clearFields = () => {
-    firstNameRef.current.value = "";
-    lastNameRef.current.value = "";
-    emailRef.current.value = "";
-    phoneRef.current.value = "";
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const firstName = firstNameRef.current.value;
-    const email = emailRef.current.value;
-    const lastName = lastNameRef.current.value;
-    const phoneNumber = phoneRef.current.value;
-
-    const checkValid = validateForm(firstName, lastName, email, phoneNumber);
-    if (checkValid) {
-      console.log("Registered successfully");
-      clearFields(firstNameRef, lastName);
-      setSuccess(true);
-      setTimeout(() => {
-        setSuccess(false);
-      }, 3000);
-    } else {
-      console.log("Sth was wrong");
-      setError(true);
-      setTimeout(() => {
-        setError(false);
-      }, 3000);
-    }
-  };
 
   return (
     <>
-      <form
-        className="relative py-4 px-7  rounded-e-xl flex flex-col gap-4  justify-center lg:w-1/3 lg:border"
-        onSubmit={handleSubmit}
+      <Formik
+        initialValues={{
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
+        }}
+        validationSchema={Yup.object({
+          firstName: Yup.string()
+            .min(3, "Must be more than 2 characters")
+            .required("Required"),
+          lastName: Yup.string()
+            .min(3, "Must be more than 2 characters")
+            .required("Required"),
+          email: Yup.string()
+            .email("Invalid Email address")
+            .required("Required"),
+        })}
+        onSubmit={(values, { setSubmitting, resetForm }) => {
+          console.log(values);
+          setSubmitting(false);
+          setSuccess(true);
+          setTimeout(() => {
+            setSuccess(false);
+          }, 3000);
+          resetForm();
+        }}
       >
-        <div
-          className={`absolute flex gap-2 items-center top-1 left-0 bg-white border px-4 py-3 rounded-lg shadow-sm transition-all ${
-            success && `translate-x-[50%] mb-5`
-          } translate-x-[400%]`}
-        >
-          Registered Successfully <FaCheckCircle className="text-green-500" />
-        </div>
+        {(formik) => (
+          <Form
+            className="relative py-4 px-7  rounded-e-xl flex flex-col gap-4  justify-center lg:w-1/3 lg:border"
+            onSubmit={formik.handleSubmit}
+          >
+            <div
+              className={`absolute flex gap-2 items-center top-1 left-0 bg-white border px-4 py-3 rounded-lg shadow-sm transition-all ${
+                success && `translate-x-[50%] mb-5`
+              } translate-x-[400%]`}
+            >
+              Registered Successfully{" "}
+              <FaCheckCircle className="text-green-500" />
+            </div>
 
-        <div
-          className={`absolute flex gap-2 items-center top-1 left-0 bg-white border px-4 py-3 rounded-lg shadow-sm transition-all ${
-            error && `translate-x-[140px] mb-5`
-          } translate-x-[640px]`}
-        >
-          Invalid fields <MdCancel className="text-xl text-red-500" />
-        </div>
-
-        <div className="flex py-5  mt-5 flex-col gap-4 w-full">
-          <div className="flex flex-col gap-2">
-            <label htmlFor="First Name">FirstName</label>
-            <input
+            <TextInput
+              label={"First Name"}
               type="text"
-              className="py-3 px-4 rounded-md border focus:outline-none"
-              name="firstName"
-              ref={firstNameRef}
-              placeholder="Doe"
-            />
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <label htmlFor="Last name">Last Name</label>
-            <input
-              className="py-3 px-4 rounded-md border focus:outline-none"
-              type="text"
-              name="lastName"
-              ref={lastNameRef}
               placeholder="John"
+              name="firstName"
             />
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <label htmlFor="email">Email</label>
-            <input
-              className="py-3 px-4 rounded-md border focus:outline-none"
-              type="email"
+            <TextInput
+              label={"Last Name"}
+              type="text"
+              placeholder="Doe"
+              name="lastName"
+            />
+            <TextInput
+              label={"Email"}
+              type="text"
+              placeholder="email@example.com"
               name="email"
-              ref={emailRef}
-              placeholder="name@example.com"
             />
-          </div>
 
-          <div className="flex flex-col gap-2">
-            <label htmlFor="Phone">Phone</label>
-
-            <input
-              className="py-3 px-4 rounded-md border focus:outline-none"
-              type="tel"
-              name="phoneNumber"
-              ref={phoneRef}
-              placeholder="0-906-692-7835"
-            />
-          </div>
-
-          <button className="py-3 px-6 bg-slate-600 w-full text-white font-semibold rounded-sm transition-all hover:bg-slate-700">
-            {" "}
-            Submit
-          </button>
-        </div>
-      </form>
+            <button
+              type="submit"
+              className="w-full text-white font-semibold py-3 px-5 rounded-md transition-all bg-slate-700 hover:bg-slate-800"
+            >
+              Sign up
+            </button>
+          </Form>
+        )}
+      </Formik>
     </>
   );
 };
 
-export default Form;
+export default SignUpForm;
