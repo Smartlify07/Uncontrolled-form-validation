@@ -25,6 +25,14 @@ const SignUpForm = () => {
           email: Yup.string()
             .email("Invalid Email address")
             .required("Required"),
+          phone: Yup.string()
+            .matches(
+              /^\+?(\d{1,3})?[-.\s]?(\(?\d{3}\)?)?[-.\s]?\d{3}[-.\s]?\d{4}$/,
+              "Invalid phone number"
+            )
+            .min(11, "Invalid phone number")
+            .max(14, "Invalid phone number")
+            .required("Required"),
         })}
         onSubmit={(values, { setSubmitting, resetForm }) => {
           console.log(values);
@@ -38,7 +46,7 @@ const SignUpForm = () => {
       >
         {(formik) => (
           <Form
-            className="relative py-4 px-7  rounded-e-xl flex flex-col gap-4  justify-center lg:w-1/3 lg:border"
+            className="relative py-4 px-7  rounded-e-xl flex flex-col gap-2  justify-center lg:w-1/3 lg:border"
             onSubmit={formik.handleSubmit}
           >
             <div
@@ -67,6 +75,12 @@ const SignUpForm = () => {
               type="text"
               placeholder="email@example.com"
               name="email"
+            />
+            <TextInput
+              label={"Phone"}
+              type="tel"
+              placeholder="080335467891"
+              name="phone"
             />
 
             <button
