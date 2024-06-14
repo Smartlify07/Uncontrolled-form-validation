@@ -44,53 +44,47 @@ const SignUpForm = () => {
           resetForm();
         }}
       >
-        {(formik) => (
-          <Form
-            className="relative py-4 px-7  rounded-e-xl flex flex-col gap-2  justify-center lg:w-1/3 lg:border"
-            onSubmit={formik.handleSubmit}
+        <Form className="relative py-4 px-7  rounded-e-xl flex flex-col gap-2  justify-center lg:w-1/3 lg:border">
+          <div
+            className={`absolute flex gap-2 items-center top-1 left-0 bg-white border px-4 py-3 rounded-lg shadow-sm transition-all ${
+              success && `translate-x-[50%] mb-5`
+            } translate-x-[400%]`}
           >
-            <div
-              className={`absolute flex gap-2 items-center top-1 left-0 bg-white border px-4 py-3 rounded-lg shadow-sm transition-all ${
-                success && `translate-x-[50%] mb-5`
-              } translate-x-[400%]`}
-            >
-              Registered Successfully{" "}
-              <FaCheckCircle className="text-green-500" />
-            </div>
+            Registered Successfully <FaCheckCircle className="text-green-500" />
+          </div>
 
-            <TextInput
-              label={"First Name"}
-              type="text"
-              placeholder="John"
-              name="firstName"
-            />
-            <TextInput
-              label={"Last Name"}
-              type="text"
-              placeholder="Doe"
-              name="lastName"
-            />
-            <TextInput
-              label={"Email"}
-              type="text"
-              placeholder="email@example.com"
-              name="email"
-            />
-            <TextInput
-              label={"Phone"}
-              type="tel"
-              placeholder="080335467891"
-              name="phone"
-            />
+          <TextInput
+            label={"First Name"}
+            type="text"
+            placeholder="John"
+            name="firstName"
+          />
+          <TextInput
+            label={"Last Name"}
+            type="text"
+            placeholder="Doe"
+            name="lastName"
+          />
+          <TextInput
+            label={"Email"}
+            type="text"
+            placeholder="email@example.com"
+            name="email"
+          />
+          <TextInput
+            label={"Phone"}
+            type="tel"
+            placeholder="080335467891"
+            name="phone"
+          />
 
-            <button
-              type="submit"
-              className="mt-3 w-full text-white font-semibold py-3 px-5 rounded-md transition-all bg-slate-600 hover:bg-slate-700"
-            >
-              Sign up
-            </button>
-          </Form>
-        )}
+          <button
+            type="submit"
+            className="mt-3 w-full text-white font-semibold py-3 px-5 rounded-md transition-all bg-slate-600 hover:bg-slate-700"
+          >
+            Sign up
+          </button>
+        </Form>
       </Formik>
     </>
   );
