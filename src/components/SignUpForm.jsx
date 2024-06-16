@@ -18,13 +18,13 @@ const SignUpForm = () => {
         validationSchema={Yup.object({
           firstName: Yup.string()
             .min(3, "Must be more than 2 characters")
-            .required("Required"),
+            .required("First name is required"),
           lastName: Yup.string()
             .min(3, "Must be more than 2 characters")
-            .required("Required"),
+            .required("Last name is required"),
           email: Yup.string()
             .email("Invalid Email address")
-            .required("Required"),
+            .required("Email address is required"),
           phone: Yup.string()
             .matches(
               /^\+?(\d{1,3})?[-.\s]?(\(?\d{3}\)?)?[-.\s]?\d{3}[-.\s]?\d{4}$/,
@@ -32,7 +32,7 @@ const SignUpForm = () => {
             )
             .min(11, "Invalid phone number")
             .max(14, "Invalid phone number")
-            .required("Required"),
+            .required("Phone number is required"),
         })}
         onSubmit={(values, { setSubmitting, resetForm }) => {
           console.log(values);
@@ -47,9 +47,9 @@ const SignUpForm = () => {
         {({ isSubmitting }) => (
           <Form className="relative py-4 px-7  rounded-e-xl flex flex-col gap-2  justify-center lg:w-1/3 lg:border">
             <div
-              className={`absolute flex gap-2 items-center top-1 left-0 bg-white border px-4 py-3 rounded-lg shadow-sm transition-all ${
+              className={`absolute flex gap-2 items-center -top-10  left-0 bg-white border px-4 py-3 rounded-lg shadow-sm transition-all ${
                 success && `translate-x-[50%] mb-5`
-              } translate-x-[400%]`}
+              } translate-x-[400%] lg:top-1`}
             >
               Registered Successfully{" "}
               <FaCheckCircle className="text-green-500" />
